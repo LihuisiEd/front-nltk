@@ -1,8 +1,13 @@
+'use strict';
 const express = require('express');
+const config = require('./config.js');
 const app = express();
-const port = 3000;
 const fetch = require('node-fetch');
 const ejs = require('ejs');
+
+const PORT = config.PORT;
+const HOST = config.HOST;
+const URL = config.URL;
 
 app.use(express.static('src'));
 app.set('view engine', 'ejs');
@@ -15,7 +20,7 @@ app.use((req, res, next) => {
 app.get('/api/load_data', async (req, res) => {
     try {
         // Cambia la url de la api por la api de flask de nltk
-        const apiUrl = 'url_de_la_api/load_data';
+        const apiUrl = `${URL}/load_data`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         res.json(data);
@@ -34,7 +39,7 @@ app.get('/api/recommendations', async (req, res) => {
     try {
         // Cambia la url de la api por la api de flask de nltk
         const movieTitle = req.query.movie_title;
-        const apiUrl = `url_de_la_api/recommendations/${movieTitle}`;
+        const apiUrl = `${URL}/recommendations/${movieTitle}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         res.json(data);
@@ -44,6 +49,5 @@ app.get('/api/recommendations', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Servidor en http://localhost:${port}`);
-});
+app.listen(PORT, HOST);
+console.log(`Servidor en http://${HOST}:${PORT}`);
