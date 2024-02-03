@@ -1,12 +1,11 @@
-FROM node:18.16.0-alpine3.17
+FROM node:12
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
-RUN npm install express --save
 
-EXPOSE 3000
+COPY . .
 
 CMD ["npm", "start"]
