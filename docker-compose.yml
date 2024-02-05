@@ -1,16 +1,20 @@
 version: "3.4"
 services:
+
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
+    build: ./frontend
+    ports: 
       - "3000:3000"
     volumes:
       - ./frontend:/frontend
       - exclude:/frontend/node_modules/
+    networks:
+      - frontend
+      - kong-net
     environment:
       - NODE_ENV='development'
       - HOST=0.0.0.0
       - PORT=3000
       - URL='url'
+volumes:
+  exclude:
