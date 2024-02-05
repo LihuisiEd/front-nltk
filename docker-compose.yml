@@ -1,6 +1,14 @@
 version: "3.4"
 services:
-
+  api:
+    build: ./api 
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/usr/local/app
+    networks:
+      - api
+    
   frontend:
     build: ./frontend
     ports: 
@@ -10,7 +18,6 @@ services:
       - exclude:/frontend/node_modules/
     networks:
       - frontend
-      - kong-net
     environment:
       - NODE_ENV='development'
       - HOST=0.0.0.0
@@ -18,3 +25,6 @@ services:
       - URL='url'
 volumes:
   exclude:
+networks:
+  frontend:
+  api:
