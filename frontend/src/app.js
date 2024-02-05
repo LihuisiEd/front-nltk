@@ -1,11 +1,14 @@
+const config = require('../config.js');
 const loadDataButton = document.querySelector('.load-data-button');
 const loaderContainer = document.querySelector('.loader-container');
 const checkContainer = document.querySelector('.check-container');
+const PORT = config.PORT;
+const HOST = config.HOST;
 loadDataButton.addEventListener('click', async () => {
     try {
         loaderContainer.classList.remove('hidden');
 
-        const response = await fetch('http://localhost:3000/api/load_data');
+        const response = await fetch(`http://${HOST}:${PORT}/api/load_data`);
         const data = await response.json();
         
         console.log('Datos de películas:', data);
@@ -25,7 +28,7 @@ document.getElementById('search-form').addEventListener('submit', async (event) 
     const movieTitle = document.querySelector('.search-input').value;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/recommendations?movie_title=${movieTitle}`);
+        const response = await fetch(`http://${HOST}:${PORT}/api/recommendations?movie_title=${movieTitle}`);
         const data = await response.json();
         updateView(data);
     } catch (error) {
