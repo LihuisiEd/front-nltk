@@ -1,6 +1,6 @@
 FROM python:3.11-slim AS base
 
-WORKDIR /usr/local/app
+WORKDIR /api
 
 COPY requirements.txt ./requirements.txt
 
