@@ -1,15 +1,14 @@
-version: '3'
-
+version: "3.4"
 services:
   frontend:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - ./frontend:/frontend
+      - exclude:/frontend/node_modules/
     environment:
       - NODE_ENV='development'
       - HOST=0.0.0.0
