@@ -1,11 +1,11 @@
 version: "3.4"
 services:    
   frontend:
-    build: ./frontend
+    build: .
     ports: 
       - "3000:3000"
     volumes:
-      - ./frontend:/frontend
+      - .:/frontend
       - exclude:/frontend/node_modules/
     networks:
       - frontend
