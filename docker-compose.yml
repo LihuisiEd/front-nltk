@@ -1,14 +1,5 @@
 version: "3.4"
-services:
-  api:
-    build: ./api 
-    ports:
-      - "8000:80"
-    volumes:
-      - ./api:/api
-    networks:
-      - api
-    
+services:    
   frontend:
     build: ./frontend
     ports: 
@@ -27,4 +18,3 @@ volumes:
   exclude:
 networks:
   frontend:
-  api:
